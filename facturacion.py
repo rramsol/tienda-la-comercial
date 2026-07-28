@@ -32,6 +32,7 @@ def imprimir_factura(cliente, items, frecuente):
     print(NOMBRE_TIENDA.center(40))
     print("Quetzaltenango, Guatemala".center(40))
     print("=" * 40)
+    print("Calidad y buen precio todos los días".center(40))
     print("Cliente: " + cliente)
     for codigo, cantidad in items:
         producto = buscar_producto(codigo)
