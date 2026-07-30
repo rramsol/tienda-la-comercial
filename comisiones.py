@@ -16,7 +16,12 @@ vendedores = [
 ]
 
 def calcular_comision_vendedor(venta):
-    """Calcula la comisión y bono para un monto de venta."""
+    """Calcula la comisión y bono para un monto de venta.
+    
+    Vendedores con venta > 30000 reciben 8% de comisión.
+    Vendedores con venta <= 30000 reciben 5% de comisión.
+    Si venta > 50000, agrega bono de 500 quetzales.
+    """
     if venta > UMBRAL_COMISION_ALTA:
         comision = venta * TASA_COMISION_ALTA
         bono = MONTO_BONO if venta > UMBRAL_BONO else 0
@@ -27,6 +32,7 @@ def calcular_comision_vendedor(venta):
     return round(comision + bono, 2)
 
 def calcular_comisiones():
+    """Imprime el reporte de comisiones mensuales."""
     total_pagar = 0
     print("=" * 44)
     print("    COMISIONES DEL MES - LA COMERCIAL")
