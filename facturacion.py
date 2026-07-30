@@ -5,7 +5,7 @@
 from inventario import buscar_producto, hay_stock
 from descuentos import descuento_cliente_frecuente
 
-NOMBRE_TIENDA = "La Comercial"
+NOMBRE_TIENDA = "Pukis´Shop"
 IVA = 0.10
 
 def calcular_subtotal(items):
@@ -31,6 +31,7 @@ def imprimir_factura(cliente, items, frecuente):
     print("=" * 40)
     print(NOMBRE_TIENDA.center(40))
     print("Quetzaltenango, Guatemala".center(40))
+    print("Precios bajos todos los días".center(40))
     print("=" * 40)
     print("Cliente: " + cliente)
     for codigo, cantidad in items:
