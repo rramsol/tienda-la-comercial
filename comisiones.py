@@ -1,13 +1,12 @@
 # -*- coding: utf-8 -*-
-# Programa de comisiones del mes - La Comercial
-# Refactorizado: nombres descriptivos, constantes con nombre y sin código muerto.
+"""Cálculo de comisiones mensuales de vendedores - La Comercial."""
 
-# Umbral de ventas a partir del cual aplica la comisión alta
+# Vendedores que superan este umbral de ventas reciben la tasa alta de comisión
 UMBRAL_COMISION_ALTA = 30000
 TASA_COMISION_ALTA = 0.08
 TASA_COMISION_BAJA = 0.05
 
-# Umbral de ventas a partir del cual se otorga bono adicional
+# Además de la comisión alta, quien supere este umbral recibe un bono fijo
 UMBRAL_BONO = 50000
 MONTO_BONO = 500
 
@@ -22,15 +21,15 @@ vendedores = [
 
 
 def calcular_comisiones():
+    """Calcula la comisión, bono y total a pagar de cada vendedor.
+
+    Devuelve la lista de resultados por vendedor y el total general,
+    sin imprimir nada: el cálculo no debe saber cómo se muestra.
+    """
+    resultados = []
     total_a_pagar = 0
 
-    print("=" * 44)
-    print("    COMISIONES DEL MES - LA COMERCIAL")
-    print("=" * 44)
-
     for nombre, monto_vendido in vendedores:
-        # Vendedores que superan el umbral reciben una tasa de comisión mayor,
-        # y si además superan el umbral de bono, se les suma un monto fijo extra
         if monto_vendido > UMBRAL_COMISION_ALTA:
             comision = round(monto_vendido * TASA_COMISION_ALTA, 2)
             bono = MONTO_BONO if monto_vendido > UMBRAL_BONO else 0
@@ -40,10 +39,23 @@ def calcular_comisiones():
 
         total_vendedor = round(comision + bono, 2)
         total_a_pagar = total_a_pagar + total_vendedor
+        resultados.append((nombre, total_vendedor))
+
+    return resultados, round(total_a_pagar, 2)
+
+
+def imprimir_reporte(resultados, total_a_pagar):
+    """Imprime el reporte de comisiones del mes en el formato de la tienda."""
+    print("=" * 44)
+    print("    COMISIONES DEL MES - LA COMERCIAL")
+    print("=" * 44)
+
+    for nombre, total_vendedor in resultados:
         print(nombre + ": Q " + str(total_vendedor))
 
     print("-" * 44)
-    print("Total a pagar: Q " + str(round(total_a_pagar, 2)))
+    print("Total a pagar: Q " + str(total_a_pagar))
 
 
-calcular_comisiones()
+resultados, total_a_pagar = calcular_comisiones()
+imprimir_reporte(resultados, total_a_pagar)
