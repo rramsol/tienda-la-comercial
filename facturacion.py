@@ -46,6 +46,12 @@ def imprimir_factura(cliente, items, frecuente):
     print("TOTAL:".ljust(28) + ("Q" + format(total, ".2f")).rjust(10))
     print("*** PROMOCIÓN DEL MES: 2x1 en escobas ***")
     print("Gracias por su compra. Vuelva pronto.")
+    print("Quetzaltenango, Guatemala".center(40)) 
+    print("Precios bajos todos los días".center(40))
+    print("=" * 40)
+
+
+
 
 if __name__ == "__main__":
     venta = [("A001", 2), ("B003", 2), ("C002", 5)]
