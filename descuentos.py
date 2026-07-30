@@ -1,11 +1,7 @@
 # -*- coding: utf-8 -*-
 # Modulo de descuentos de La Comercial
 
-<<<<<<< HEAD
 DESCUENTO_CLIENTE_FRECUENTE = 0.08
-=======
-DESCUENTO_CLIENTE_FRECUENTE = 0.10
->>>>>>> feature/descuentos
 UMBRAL_MAYOREO = 12
 DESCUENTO_MAYOREO = 0.15
 
