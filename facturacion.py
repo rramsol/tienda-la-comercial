@@ -30,6 +30,7 @@ def imprimir_factura(cliente, items, frecuente):
     total, impuesto = calcular_total(subtotal, descuento)
     print("=" * 40)
     print(NOMBRE_TIENDA.center(40))
+    print("Quetzaltenango, Guatemala".center(40))
     print("Stay Hard".center(40))
     print("=" * 40)
     print("Cliente: " + cliente)
