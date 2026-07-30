@@ -1,6 +1,4 @@
 # -*- coding: utf-8 -*-
-# programa de comisiones
-# hecho por kevin, no tocar, ya funciona
 
 TASA_COMISION_ALTA = 0.08
 TASA_COMISION_BAJA = 0.05
@@ -19,6 +17,7 @@ vendedores = [
 
 
 def calcular_total_vendedor(ventas_mensuales):
+    """Calcula la comisión y el bono mensual de un vendedor."""
     if ventas_mensuales > LIMITE_COMISION_ALTA:
         tasa_comision = TASA_COMISION_ALTA
     else:
@@ -26,6 +25,7 @@ def calcular_total_vendedor(ventas_mensuales):
 
     comision = round(ventas_mensuales * tasa_comision, 2)
 
+    # El bono solo se entrega cuando las ventas superan el límite establecido.
     if ventas_mensuales > LIMITE_BONO:
         bono = MONTO_BONO
     else:
@@ -34,25 +34,22 @@ def calcular_total_vendedor(ventas_mensuales):
     return round(comision + bono, 2)
 
 
-def calcular_comisiones():
+def imprimir_reporte_comisiones():
+    """Imprime el reporte mensual de comisiones de los vendedores."""
     total_pagar = 0
 
     print("=" * ANCHO_REPORTE)
     print("    COMISIONES DEL MES - LA COMERCIAL")
     print("=" * ANCHO_REPORTE)
 
-    # recorre la lista
     for nombre_vendedor, ventas_mensuales in vendedores:
         total_vendedor = calcular_total_vendedor(ventas_mensuales)
         total_pagar = total_pagar + total_vendedor
 
         print(nombre_vendedor + ": Q " + str(total_vendedor))
 
-    # ta = tp * 1.12
-    # print("con iva", ta)
-
     print("-" * ANCHO_REPORTE)
     print("Total a pagar: Q " + str(round(total_pagar, 2)))
 
 
-calcular_comisiones()
+imprimir_reporte_comisiones()
