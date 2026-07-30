@@ -10,7 +10,7 @@ def descuento_cliente_frecuente(subtotal):
     return subtotal * DESCUENTO_CLIENTE_FRECUENTE
 
 def descuento_por_volumen(cantidad, precio_unitario):
-    if cantidad > UMBRAL_MAYOREO:
+    if cantidad >= UMBRAL_MAYOREO:
         return precio_unitario * cantidad * DESCUENTO_MAYOREO
     return 0
 
