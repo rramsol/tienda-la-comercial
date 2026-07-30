@@ -20,47 +20,53 @@ VENDEDORES = [
 ]
 
 
-def calcular_comisiones():
+def calcular_comision(ventas):
+    # si vendio mas de 30000
+    if ventas > UMBRAL_COMISION_ALTA:
+        # calcula la comision del 8%
+        tasa_comision = TASA_COMISION_ALTA
+    else:
+        # calcula la comision del 5%
+        tasa_comision = TASA_COMISION_BASE
+
+    return round(ventas * tasa_comision, DECIMALES_MONEDA)
+
+
+def calcular_bono(ventas):
+    # el bono es de 300
+    if ventas > UMBRAL_BONO:
+        return BONO_VENTAS_ALTAS
+
+    return SIN_BONO
+
+
+def calcular_pago_vendedor(ventas):
+    comision = calcular_comision(ventas)
+    bono = calcular_bono(ventas)
+
+    return round(comision + bono, DECIMALES_MONEDA)
+
+
+def calcular_pagos(vendedores):
+    pagos = []
     total_a_pagar = 0
 
+    # recorre la lista
+    for nombre_vendedor, ventas in vendedores:
+        total_vendedor = calcular_pago_vendedor(ventas)
+        pagos.append((nombre_vendedor, total_vendedor))
+        total_a_pagar = total_a_pagar + total_vendedor
+
+    return pagos, total_a_pagar
+
+
+def imprimir_reporte(pagos, total_a_pagar):
     print("=" * ANCHO_REPORTE)
     print("    COMISIONES DEL MES - LA COMERCIAL")
     print("=" * ANCHO_REPORTE)
 
-    # recorre la lista
-    for vendedor in VENDEDORES:
-        # si vendio mas de 30000
-        if vendedor[1] > UMBRAL_COMISION_ALTA:
-            # calcula la comision del 8%
-            comision = vendedor[1] * TASA_COMISION_ALTA
-            comision = round(comision, DECIMALES_MONEDA)
-
-            # el bono es de 300
-            if vendedor[1] > UMBRAL_BONO:
-                bono = BONO_VENTAS_ALTAS
-            else:
-                bono = SIN_BONO
-
-            total_vendedor = round(
-                comision + bono,
-                DECIMALES_MONEDA,
-            )
-            total_a_pagar = total_a_pagar + total_vendedor
-
-            print(vendedor[0] + ": Q " + str(total_vendedor))
-        else:
-            # calcula la comision del 5%
-            comision = vendedor[1] * TASA_COMISION_BASE
-            comision = round(comision, DECIMALES_MONEDA)
-            bono = SIN_BONO
-
-            total_vendedor = round(
-                comision + bono,
-                DECIMALES_MONEDA,
-            )
-            total_a_pagar = total_a_pagar + total_vendedor
-
-            print(vendedor[0] + ": Q " + str(total_vendedor))
+    for nombre_vendedor, total_vendedor in pagos:
+        print(nombre_vendedor + ": Q " + str(total_vendedor))
 
     # ta = tp * 1.12
     # print("con iva", ta)
@@ -71,4 +77,9 @@ def calcular_comisiones():
     )
 
 
-calcular_comisiones()
+def generar_reporte_comisiones():
+    pagos, total_a_pagar = calcular_pagos(VENDEDORES)
+    imprimir_reporte(pagos, total_a_pagar)
+
+
+generar_reporte_comisiones()
