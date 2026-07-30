@@ -15,35 +15,27 @@ vendedores = [
     ("Lucía Morales", 33400.00),
 ]
 
+def calcular_comision_vendedor(venta):
+    """Calcula la comisión y bono para un monto de venta."""
+    if venta > UMBRAL_COMISION_ALTA:
+        comision = venta * TASA_COMISION_ALTA
+        bono = MONTO_BONO if venta > UMBRAL_BONO else 0
+    else:
+        comision = venta * TASA_COMISION_BAJA
+        bono = 0
+    
+    return round(comision + bono, 2)
+
 def calcular_comisiones():
     total_pagar = 0
     print("=" * 44)
     print("    COMISIONES DEL MES - LA COMERCIAL")
     print("=" * 44)
     
-    for vendedor in vendedores:
-        nombre_vendedor = vendedor[0]
-        venta = vendedor[1]
-        
-        if venta > UMBRAL_COMISION_ALTA:
-            comision = venta * TASA_COMISION_ALTA
-            comision = round(comision, 2)
-            
-            if venta > UMBRAL_BONO:
-                bono = MONTO_BONO
-            else:
-                bono = 0
-            
-            total_vendedor = round(comision + bono, 2)
-            total_pagar = total_pagar + total_vendedor
-            print(nombre_vendedor + ": Q " + str(total_vendedor))
-        else:
-            comision = venta * TASA_COMISION_BAJA
-            comision = round(comision, 2)
-            bono = 0
-            total_vendedor = round(comision + bono, 2)
-            total_pagar = total_pagar + total_vendedor
-            print(nombre_vendedor + ": Q " + str(total_vendedor))
+    for nombre_vendedor, venta in vendedores:
+        total_vendedor = calcular_comision_vendedor(venta)
+        total_pagar = total_pagar + total_vendedor
+        print(nombre_vendedor + ": Q " + str(total_vendedor))
     
     print("-" * 44)
     print("Total a pagar: Q " + str(round(total_pagar, 2)))
