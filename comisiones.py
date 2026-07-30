@@ -1,8 +1,5 @@
 # -*- coding: utf-8 -*-
 
-# programa de comisiones
-# hecho por kevin, no tocar, ya funciona
-
 COMISION_BASICA = 0.05
 COMISION_SUPERIOR = 0.08
 
@@ -24,6 +21,10 @@ vendedores = [
 
 
 def calcular_total_vendedor(ventas):
+    """
+    Calcula la comisión y el bono correspondiente
+    según el monto de ventas del vendedor.
+    """
     if ventas > META_COMISION_SUPERIOR:
         porcentaje_comision = COMISION_SUPERIOR
     else:
@@ -40,6 +41,10 @@ def calcular_total_vendedor(ventas):
 
 
 def calcular_comisiones():
+    """
+    Genera el reporte mensual de comisiones de los vendedores
+    y muestra el total a pagar.
+    """
     total_pagar = 0
 
     print("=" * ANCHO_REPORTE)
