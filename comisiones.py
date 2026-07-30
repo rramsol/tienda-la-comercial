@@ -1,8 +1,7 @@
 # -*- coding: utf-8 -*-
-# programa de comisiones
-# hecho por kevin, no tocar, ya funciona
 
-# Valores utilizados en las reglas del negocio
+"""Calcula y muestra las comisiones mensuales de los vendedores."""
+
 ANCHO_REPORTE = 44
 LIMITE_COMISION_ALTA = 30000
 TASA_COMISION_ALTA = 0.08
@@ -11,7 +10,6 @@ MONTO_BONO = 500
 TASA_COMISION_BASE = 0.05
 DECIMALES_MONEDA = 2
 
-# lista de vendedores
 ventas_vendedores = [
     ("María López", 45000.00),
     ("Carlos Pérez", 28500.00),
@@ -22,12 +20,12 @@ ventas_vendedores = [
 
 
 def calcular_comision(monto_ventas):
-    # si vendio mas de 30000
+    """Calcula la comision correspondiente al monto vendido."""
+
+    # La tasa alta aplica solo cuando se supera el limite.
     if monto_ventas > LIMITE_COMISION_ALTA:
-        # calcula la comision del 8%
         tasa_comision = TASA_COMISION_ALTA
     else:
-        # calcula la comision del 5%
         tasa_comision = TASA_COMISION_BASE
 
     comision = monto_ventas * tasa_comision
@@ -36,7 +34,9 @@ def calcular_comision(monto_ventas):
 
 
 def calcular_bono(monto_ventas):
-    # el bono es de 300
+    """Calcula el bono adicional por superar la meta de ventas."""
+
+    # La regla exige superar la meta, no solamente igualarla.
     if monto_ventas > LIMITE_BONO:
         return MONTO_BONO
 
@@ -44,6 +44,8 @@ def calcular_bono(monto_ventas):
 
 
 def calcular_pago_vendedor(monto_ventas):
+    """Calcula el pago total de comision y bono."""
+
     comision = calcular_comision(monto_ventas)
     bono = calcular_bono(monto_ventas)
 
@@ -53,10 +55,11 @@ def calcular_pago_vendedor(monto_ventas):
 
 
 def calcular_comisiones(vendedores):
+    """Calcula los pagos individuales y el total general."""
+
     pagos_vendedores = []
     total_comisiones = 0
 
-    # recorre la lista
     for nombre_vendedor, monto_ventas in vendedores:
         total_vendedor = calcular_pago_vendedor(
             monto_ventas
@@ -79,6 +82,8 @@ def calcular_comisiones(vendedores):
 
 
 def imprimir_reporte(pagos_vendedores, total_comisiones):
+    """Muestra el reporte mensual conservando su formato original."""
+
     print("=" * ANCHO_REPORTE)
     print("    COMISIONES DEL MES - LA COMERCIAL")
     print("=" * ANCHO_REPORTE)
@@ -89,9 +94,6 @@ def imprimir_reporte(pagos_vendedores, total_comisiones):
             + ": Q "
             + str(total_vendedor)
         )
-
-    # ta = tp * 1.12
-    # print("con iva", ta)
 
     print("-" * ANCHO_REPORTE)
     print(
