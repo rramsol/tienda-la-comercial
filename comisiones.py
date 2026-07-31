@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
-# programa de comisiones
-# hecho por kevin, no tocar, ya funciona
+"""Calcula e imprime las comisiones mensuales de los vendedores."""
 
 ANCHO_REPORTE = 44
 UMBRAL_COMISION_ALTA = 30000
@@ -9,7 +8,6 @@ TASA_COMISION_BASE = 0.05
 UMBRAL_BONO = 50000
 MONTO_BONO = 500
 
-# lista de vendedores
 VENDEDORES = [
     ("María López", 45000.00),
     ("Carlos Pérez", 28500.00),
@@ -20,19 +18,15 @@ VENDEDORES = [
 
 
 def calcular_comision(ventas_mensuales):
-    # si vendio mas de 30000
     if ventas_mensuales > UMBRAL_COMISION_ALTA:
-        # calcula la comision del 8%
         tasa_comision = TASA_COMISION_ALTA
     else:
-        # calcula la comision del 5%
         tasa_comision = TASA_COMISION_BASE
 
     return round(ventas_mensuales * tasa_comision, 2)
 
 
 def calcular_bono(ventas_mensuales):
-    # el bono es de 300
     if ventas_mensuales > UMBRAL_BONO:
         return MONTO_BONO
 
@@ -50,7 +44,6 @@ def calcular_pagos_mensuales(vendedores):
     pagos_vendedores = []
     total_comisiones = 0
 
-    # recorre la lista
     for nombre_vendedor, ventas_mensuales in vendedores:
         total_vendedor = calcular_pago_vendedor(ventas_mensuales)
         pagos_vendedores.append((nombre_vendedor, total_vendedor))
@@ -67,8 +60,6 @@ def imprimir_reporte(pagos_vendedores, total_comisiones):
     for nombre_vendedor, total_vendedor in pagos_vendedores:
         print(nombre_vendedor + ": Q " + str(total_vendedor))
 
-    # ta = tp * 1.12
-    # print("con iva", ta)
     print("-" * ANCHO_REPORTE)
     print("Total a pagar: Q " + str(total_comisiones))
 
