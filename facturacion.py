@@ -5,8 +5,8 @@
 from inventario import buscar_producto, hay_stock
 from descuentos import descuento_cliente_frecuente
 
-NOMBRE_TIENDA = "La Comercial"
-IVA = 0.10
+NOMBRE_TIENDA = "Tienda El Buen Precio"
+IVA = 0.12
 
 def calcular_subtotal(items):
     # items es una lista de tuplas (codigo, cantidad)
@@ -22,7 +22,7 @@ def calcular_total(subtotal, descuento):
     impuesto = base * IVA
     return base + impuesto, impuesto
 
-def imprimir_factura(cliente, items, frecuente):
+def imprimir_factura(cliente, items, frecuente):    
     subtotal = calcular_subtotal(items)
     descuento = 0
     if frecuente:
@@ -31,6 +31,7 @@ def imprimir_factura(cliente, items, frecuente):
     print("=" * 40)
     print(NOMBRE_TIENDA.center(40))
     print("Quetzaltenango, Guatemala".center(40))
+    print("Precios bajos todos los días".center(40))
     print("=" * 40)
     print("Cliente: " + cliente)
     for codigo, cantidad in items:
@@ -44,7 +45,6 @@ def imprimir_factura(cliente, items, frecuente):
     print("Descuento:".ljust(28) + ("Q" + format(descuento, ".2f")).rjust(10))
     print("IVA (12%):".ljust(28) + ("Q" + format(impuesto, ".2f")).rjust(10))
     print("TOTAL:".ljust(28) + ("Q" + format(total, ".2f")).rjust(10))
-    print("*** PROMOCIÓN DEL MES: 2x1 en escobas ***")
     print("Gracias por su compra. Vuelva pronto.")
 
 if __name__ == "__main__":
